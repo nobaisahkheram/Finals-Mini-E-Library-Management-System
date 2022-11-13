@@ -150,26 +150,3 @@ elif stdntUsern != "stdntusern" and stdntPass != "stdntpass":
     print("\n\n    Invalid Login Details! \n    Press any key to try again.. ")
 input()
 accMenu()
-
-
-
-#elif choice == 2:
- #centraLibrary.borrowBook(student.requestBook())
-#elif a == 3:
- #
- # 
- # 
- #centraLibrary.returnBook(student.returnBook())
-        
-#a = int(input("Enter a choice: "))
-#if a == 1:
- #centraLibrary.displayAvailableBooks()
-#elif a == 2:
- #centraLibrary.borrowBook(student.requestBook())
-#elif a == 3:
- #centraLibrary.returnBook(student.returnBook())
-#elif a == 4:
-            #print("Thanks for choosing our Library.")
-           # exit()
-#else:
-      #      print("Invalid Choice!")
