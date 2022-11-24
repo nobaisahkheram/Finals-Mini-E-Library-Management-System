@@ -1,0 +1,60 @@
+1|Sapiens|Yuval Noah Harari|true
+2|The Lessons of History|Will & Ariel Durant|true
+3|The Dawn of Everything|David Graeber & David Wengrow|true
+4|The Evolution of Everything|Matt Ridley|true
+5|Factfulness|Hans Rosling|true
+6|Enlightenment Now|Steven Pinker|true
+7|A People’s History of the United States|Howard Zinn|true
+8| Common Sense| Thomas Paine|true
+9| Team of Rivals| Doris Kearns Goodwin|true
+10| The Warmth of Other Suns| Isabel Wilkerson|true
+11| Orientalism| Edward W. Said|true
+12| Restart| Mihir S. Sharma|true
+13| Age of Ambition| Evan Osnos|true
+14| Napoleon the Great| Andrew Roberts|true
+15| The House of Rothschild| Niall Ferguson|true
+16| A History of the World in 6 Glasses| Tom Standage|true
+17| Salt: A World History| Mark Kurlansky|true
+18| Homo Deus| Yuval Noah Harari|true
+19| How We Got to Now| Steven Johnson|true
+20| The Third Wave| Steve Case|true
+21| At Home| Bill Bryson|true
+22| A Short History of Nearly Everything| Bill Bryson|true
+23| A Brief History of Time| Stephen Hawking|true
+24| The Double Helix| James D. Watson|true
+25| The Selfish Gene| Richard Dawkins|true
+26| Sex at Dawn| Christopher Ryan|true
+27| A Splendid Exchange| William J. Bernstein|true
+28| Capitalism| James Fulcher|true
+29| Narrative Economics| Robert J. Shiller|true
+30| A World in Disarray| Richard Haass|true
+31| Prisoners of Geography| Tim Marshall|true
+32| The Power of Myth| Joseph Campbell|true
+33| The Republic| Plato|true
+34| Caste| Isabel Wilkerson|true
+35| The Social Contract| Jean-Jaques Rousseau|true
+36| Capitalism and Freedom| Milton Friedman|true
+37| The Road to Serfdom| Friedrich Hayek|true
+38| Socialism| Michael W. Newman|true
+39| Fascism| Madeleine K. Albright|true
+40| On Liberty| John Stuart Mill|true
+41| How Democracies Die| Steven Levitsky|true
+42| Discourses| Epictetus|true
+43| The Lucifer Effect| Philip Zimbardo|true
+44| The Better Angels of Our Nature| Steven Pinker|true
+45| Meditations on First Philosophy| René Descartes|true
+46| The Story of Philosophy| Will Durant|true
+47| Lives of the Stoics| Ryan Holiday|true
+48| The Sixth Extinction| Elizabeth Kolbert|true
+49| The Uninhabitable Earth| David Wallace-Wells|true
+50| Empty Planet| Darrell Bricker & John Ibbitson|true
+51| The Prince| Niccolò Machiavelli|true
+52| Man’s Search for Meaning| Viktor Frankl|true
+53| The 48 Laws of Power| Robert Greene|true
+54| Alexander the Great| Philip Freeman|true
+55| Benjamin Franklin: An American Life| Walter Isaacson|true
+56| The Autobiography of Malcolm X| Malcolm X|true
+57| Steve Jobs| Walter Isaacson|true
+58| The Immortal Life of Henrietta Lacks| Rebecca Skloot|true
+59| A Woman of No Importance| Sonia Purnell|true
+60| Long Walk to Freedom| Nelson Mandela|true
