@@ -1,417 +1,785 @@
-class Library:
-    def __init__(self,Count_book,name):
-        self.Count_book_dict = Count_book
-        self.name = name
-        self.bookdict = {}
-        self.max_book_count = {}
-        self.Count_book_dict
+from datetime import datetime
 
-    #display books name and quantity currently present in the library   
-    def displayAvailableBooks(self): 
-        for books in self.Count_book_dict.items():
-            print(books)
+class LoginSystem:
 
-from datetime import date,timedelta
-class User:
-    def __init__(self,username,password,user,email,mobile,address):
-        self.username = username
-        self.password = password
-        self.user = user
-        self.email = email
-        self.mobile = mobile
-        self.address = address
-        
-class Member(User):
-    def __init__(self,username,password,user,email,mobile,address,studentID):
-        super().__init__(username,password,user,email,mobile,address)
-        self.member_id = studentID
-        self.max_book_count = {}
-        self.bookdict = {}
-        
-    def Count_book(self,user,book):
-        if user not in self.max_book_count:
-            self.max_book_count[user] = [book]
-            return len(self.max_book_count[user])
+  def doLogin():
+    while True:
+      print("\nLOGIN")
+      username=input("Username: ")    
+      password=input("Password: ")
+
+      rec=""
+      valid=False
+      with open(LibrarySystem.USERS_FILE) as file:
+        while (line:=file.readline().rstrip()):
+          rec=line.split("|")
+          if username==rec[1] and password==rec[2]:
+            valid=True
+            break
+
+      if valid:  
+        LibrarySystem.user["id"]=int(rec[0])
+        LibrarySystem.user["user"]=rec[1]
+        LibrarySystem.user["role"]=rec[3]
+        print("\n    Access Granted. ")
+        if LibrarySystem.user["role"]=="librarian":
+          LibrarySystem.doLibrarianMenu()
         else:
-            if len(self.max_book_count[user])<=4:
-                self.max_book_count[user].append(book)
-                return len(self.max_book_count[user])
-            else:
-                return len(self.max_book_count[user])
+          LibrarySystem.doStudentMenu()
+      else:
+        print("\n***** Access Denied *****")
 
-class Librarian(User):
-    def __init__(self,username,password,name,email,mobile,address,librarian_id):
-        super().__init__(username,password,name,email,mobile,address)
-        self.librarian_id = librarian_id
 
-# add new_book in the library
-    def add_book(self,library,book_name,quantity,author,rack,publish_date,pages):
-        if quantity>0:
-            if book_name in library.Count_book_dict.keys():
-                library.Count_book_dict[book_name][0]+=quantity
-            else:
-                library.Count_book_dict.update({book_name:[quantity,author,rack,publish_date,pages]})
-                print("\nBook has been succesfully added to the Library.")
-        else:
-            print("Error! Please enter positive integer for quantity of book.")
-            
-    def removeBook(self,library,book_name,quantity,author,rack,publish_date,pages):
-        if quantity>0:
-            if book_name in library.Count_book_dict.keys():
-                if library.Count_book_dict[book_name][0]>=1:
-                    library.Count_book_dict[book_name][0]-=quantity
-                    if library.Count_book_dict[book_name][0] < 0:
-                        library.Count_book_dict[book_name][0]+=quantity
-                        print("\nError! Please enter correct quantity of book. We only have {} books of {}".format(library.Count_book_dict[book_name][0],book_name))
-                    else:
-                        print("\nGreat! Book has been succesfully removed.")
-                else:
-                    library.Count_book_dict.pop(book_name)
-                    print("\nSorry, We don't have any books of {} in our Library".format(book_name))
-            else:
-                print("\nSorry, We don't have any books of {} in our Library".format(book_name))
-        else:
-            print("Error! Please enter positive integer for quantity of book.")
-    
- # Issuing book to the user by cross verifying libray stock and user can issue only one book of particular subject
- # maintaining record         
-    def borrowBook(self,library,book,user): 
-            if book in library.Count_book_dict.keys():
-                if library.Count_book_dict[book][0]>=1:
-                    if (book,user) not in self.bookdict.keys():
-                        if not self.check_previous_fine(book,user):
-                            if self.Count_book(user,book)<=5:
-                                lend_date = date.today()
-                                returnDate = date.today()+timedelta(days = 10)
-                                self.bookdict.update({(book,user):returnDate})
-                                library.Count_book_dict[book][0] -= 1
-                                for value in self.bookdict.keys():
-                                    if value == (book,user):
-                                        print("Great! {} book is issued to your name {} on {}. You can get the book".format(value[0],value[1],lend_date))
-                                        print("You have 10 days to read the book. Please be advise to return the book on time otherwise P10/day fine will be charge.")
-                                        print("Thank you for using Mini E-Library. Enjoy!")
-                                        print(self.max_book_count)
-                            else:
-                                print("Sorry, you can issue maximum of 5 books only.")
-                        else:
-                            print("Sorry, you have to pay the fine first to be able to borrow the book.")
-                    else:
-                        print("This book was already issued to your name")
-                else:
-                    print("Sorry, this book is currently not available.")
-            else:
-                print("Sorry, This book is either not available or has already been issued to someone else. Please wait until the book is available")
-     
-    def check_previous_fine(self,book,user):
-        current_date = date.today()
-        for key,value in self.bookdict.items():
-            if key[1]==user:
-                returnDate = self.bookdict[key]
-                if current_date > returnDate:
-                    delay_days = (current_date - returnDate).days
-                    total_fine = delay_days*10
-                    return total_fine
-                else:
-                    return 0 
 
-#return book,updating records and if delay then charge fine P10/day.            
-    def returnBook(self,library,book,user):
-        if (book,user)in self.bookdict.keys():
-            returnDate =  self.bookdict[(book,user)]
-            current_date = date.today()
-            if current_date > returnDate:
-                delay_days = (current_date - returnDate).days
-                total_fine = delay_days*10
-                print("Please pay fine, you have to pay {} pesos" .format(total_fine))
-                print("We are redirecting you on Payment page. Please wait...")
-                self.payment(library,book,user)
-            else:
-                self.max_book_count[user].remove(book)
-                self.bookdict.pop((book,user))
-                library.Count_book_dict[book][0] += 1
-                print("\n")
-                print("Book sucessfully returned. Thank you, Hope you enjoyed reading it. Have a great day!")
-        else:
-            print("\n")
-            print("Please provide correct username and book name")
-            
-            
-    def payment(self,library,book,user):
-        print("For payment process. Enter your choice ")
-        choice = input("Yes/No: ")
-        if choice == "Yes":
-            print("Your payment is now processing.")
-            print("PLEASE WAIT...")
-            input()
-            print("PAYMENT SUCCESFUL")
-            self.max_book_count[user].remove(book)
-            self.bookdict.pop((book,user))
-            library.Count_book_dict[book][0] += 1
-        else:
-            print("We are redirecting you to Homepage")
-            
-            
-    def check_fine(self,library,book,user):
-        if (book,user)in self.bookdict.keys():
-            returnDate =  self.bookdict[(book,user)]
-            current_date = date.today()
-            if current_date > returnDate:
-                delay_days = (current_date - returnDate).days
-                total_fine = delay_days*10
-                print("Please pay fine, you have to pay {} pesos." .format(total_fine))
-                print("Do you want to pay fine now?")
-                choice = input("Yes/No")
-                if choice == "Yes":
-                    self.payment(library,book,user)
-                else:
-                    print("We are redirecting you to Homepage.")
-            else:
-                print("You don't need to pay fine.")
-        else:
-            print("Enter correct information.")
+class LibrarySystem:
 
-class Users:
-    def __init__(self, username, password):
-        self.username = username
-        self.password = password
-        
-class UserExists(Exception):
-    pass
+  USER_ID_FILE="user_id.txt"
+  USERS_FILE="users.txt"
+  PROFILES_FILE="profiles.txt"
+  BOOKS_FILE="books.txt"
+  BORROWERS_FILE="borrowers.txt"
 
-class UserDatabase:
-    def __init__(self):
-        self.database = {}
-    
-    def add_user(self, user):
-        if user.username in self.database:
-            raise UserExists
-        self.database[user.username] = user
+  finePerDay = 10.00
 
-class MainApp:
-    def __init__(self):
-        self.database = {}
-        self.logged_in_user = None
+  user={}
 
-    def librarian_main_menu(self):
-        while True:
-            print("\n")
-            print("\n     [1] REGISTER")
-            print("\n     [2] LOG IN")
-            print("\n     [3] LOG OUT")
-            print("\n     [4] EXIT")
-            print("\n\n================================================")
+  def doLibrarianMenu():
+    while True:
+      print(
+        "\n================================================"+
+        "\n\n               LIBRARIAN MENU "+
+        "\n\n================================================"+
+        "\n\n\t     [1] USER MANAGEMENT"+
+        "\n\t     [2] BOOK MANAGEMENT"+
+        "\n\t     [3] bORROWER MANAGEMNT"+
+        "\n\t     [4] GO BACK TO LOGIN"+
+        "\n\n================================================"
+      )
+      choice=int(input("Choice: "))
+      if choice==0:
+        break
+      elif choice==1:
+        LibrarySystem.doUserManagementMenu()
+      elif choice==2:
+        LibrarySystem.doBookManagementMenu()
+      elif choice==3:
+        LibrarySystem.doBorrowerManagementMenu()
+      else:
+        print("Invalid choice.")
 
-            _ = ""
-            try: _ = int(input('What do you want to do? '))
-            except ValueError:
-              print('Incorrect Entry!')
-            
-            if _ == 4:
-                print('Goodbye!')
-                accMenu()
 
-            if _ == 1:
-                self.register()
-            
-            elif _ == 2:
-                self.login()
                 
-            elif _ == 3:
-                self.logout()
+  def doUserManagementMenu():
+    while True:
+      print(
+        "\n================================================"+
+        "\n\n             USER MANAGEMENT MENU "+
+        "\n\n================================================"+
+        "\n\n\t    [1] ADD USER"+
+        "\n\t    [2] SEARCH USER"+
+        "\n\t    [3] UPDATE USER"+
+        "\n\t    [4] UPDATE USER PROFILE"+
+        "\n\t    [5] DELETE USER"+
+        "\n\t    [0] GO BACK TO LIBRARIAN MENU"+
+        "\n\n================================================"
+      )
 
+      choice=int(input("Choice: "))
+      if choice==0:
+        break
+      elif choice==1:
+        LibrarySystem.doAddUser()
+      elif choice==2:
+        LibrarySystem.doSearchUser()
+      elif choice==3:
+        LibrarySystem.doUpdateUser()
+      elif choice==4:
+        LibrarySystem.doUpdateUserProfile()
+      elif choice==5:
+        LibrarySystem.doDeleteUser()
+      else:
+        print("Invalid choice.")
+
+
+
+  def doAddUser():
+    id=1
+    role=""
+
+    print("ADD USER\n")
+    username=input("Username: ")
+    password=input("Password: ")
+
+    while True:
+      print(
+        "\nRole:\n"+
+        "1. Librarian\n"+
+        "2. Student\n"
+      )
+      choice=int(input("Choice: "))
+      if choice==1:
+        role="Librarian"
+        break
+      elif choice==2:
+        role="Student"
+        break
+      else:
+        print("Invalid choice.") 
+
+    with open(LibrarySystem.USER_ID_FILE) as file:
+      id=int(file.readline())
+
+    with open(LibrarySystem.USER_ID_FILE,"w") as file:
+      file.write("{}\n".format(id+1))
+
+    with open(LibrarySystem.USERS_FILE,"a") as file:
+      file.write("{}|{}|{}|{}\n".format(id,username,password,role))
+
+    print("\nRecord added.")
+
+
+
+  def doSearchUser():
+    print("\nSEARCH USER")
+    search=input("\nSearch Text: ")
+    print()
+    words=search.split(" ")
+    with open(LibrarySystem.USERS_FILE) as file:
+      notFound=True
+      while (line:=file.readline().rstrip()):
+        found=False
+        for word in words: 
+          if line.lower().find(word.lower())!=-1:
+            found=True
+            notFound=False
+            break
+        if found:
+          rec=line.split("|")
+          print("ID: {}".format(rec[0]))
+          print("Username: {}".format(rec[1]))
+          print("Role: {}".format(rec[3]))
+      if notFound:
+        print("\nRecord not found.")   
+
+
+
+  def doUpdateUser():
+    print("\nUPDATE USER")
+    id=int(input("User ID: "))
+    print()
+
+    with open(LibrarySystem.USERS_FILE) as file:      
+      lines=[]
+      found=False
+      while (line:=file.readline().rstrip()):
+        rec=line.split("|")
+        if id==int(rec[0]):
+          found=True
+
+          print("ID: {}".format(rec[0]))
+          print("Username: {}".format(rec[1]))
+          print("Role: {}\n".format(rec[3]))
+
+          username=input("Update Username: ")
+          password=input("Update Password: ")
+
+          role=""
+
+          while True:
+            print(
+              "\nUpdate Role:\n"+
+              "1. Librarian\n"+
+              "2. Student\n"
+            )
+            choice=int(input("Choice: "))
+            if choice==1:
+              role="Librarian"
+              break
+            elif choice==2:
+              role="Student"
+              break
             else:
-                print('Incorrect entry!, Try again?')
+              print("Invalid choice.") 
 
-    def register(self):
-        username = input('Username:')
+          lines.append("{}|{}|{}|{}".format(id,username,password,role))
+          
+        else:
+          lines.append(line)
 
-        if username in self.database:
-            print('This username is already taken.')
-            return
+      if found:
+        with open(LibrarySystem.USERS_FILE,"w") as file:
+          for line in lines:
+            file.write("{}\n".format(line))
+        print("\nRecord updated.")  
+      else:
+        print("\nRecord not found.")  
 
-        password = input('Password:')
 
-        self.database[username] = Users(username, password)
-    
-    def login(self):
-        username = input('Username:')
 
-        if username not in self.database:
-            print('Username or password is not valid.')
-            return
+  def doUpdateUserProfile():
+    print("\nUPDATE USER PROFILE\n")    
+    id=int(input("User ID: "))
+    print()
 
-        password = input('Password:')
+    with open(LibrarySystem.PROFILES_FILE) as file:      
+      lines=[]
+      found=False
+      while (line:=file.readline().rstrip()):
+        rec=line.split("|")
+        if id==int(rec[0]):
+          found=True
 
-        user = self.database[username]
+          print("Firstname: {}".format(rec[1]))
+          print("Lastname: {}".format(rec[2]))
+          print("Address: {}".format(rec[3]))
+          print()
 
-        if user.password != password:
-            print('Username or password is not valid.')
-            return
+          firstname=input("Update Firstname: ")
+          lastname=input("Update Lastname: ")
+          address=input("Update Address: ")
+
+          lines.append("{}|{}|{}|{}".format(id,firstname,lastname,address))
+          
+        else:
+          lines.append(line)
+
+      if found:
+        with open(LibrarySystem.PROFILES_FILE,"w") as file:
+          for line in lines:
+            file.write("{}\n".format(line))
+      else:
+        print("ENTER PROFILE")  
+
+        firstname=input("Firstname: ")
+        lastname=input("Lastname: ")
+        address=input("Address: ")
+
+        with open(LibrarySystem.PROFILES_FILE,"a") as file:
+          file.write("{}|{}|{}|{}\n".format(id,firstname,lastname,address))
+
+      print("\nRecord updated.")  
+
+
+
+  def doDeleteUser():
+    print("\nDELETE USER")
+    id=int(input("User ID: "))
+    print()
+
+    with open(LibrarySystem.USERS_FILE) as file:
+      lines=[]
+      found=False
+      while (line:=file.readline().rstrip()):
+        rec=line.split("|")
+        if id==int(rec[0]):
+          found=True
+        else:
+          lines.append(line)
+
+      if found:
+        with open(LibrarySystem.USERS_FILE,"w") as file:
+          for line in lines:
+            file.write("{}\n".format(line))
+        print("\nRecord is deleted.")
+      else:
+        print("\nRecord not found.")  
         
-        self.logged_in_user = user
-        print('Logged in.')
-        libMenu()
+
+
+  def doBookManagementMenu():
+    while True:
+      print(
+        "\nBook Management Menu:\n"+
+        "1. Add Book\n"+
+        "2. Search Book\n"+
+        "3. Update Book\n"+
+        "4. Delete Book\n"+
+        "0. Back to Librarian Menu\n"
+      )
+      choice=int(input("Choice: "))
+      if choice==0:
+        break
+      elif choice==1:
+        LibrarySystem.doAddBook()
+      elif choice==2:
+        LibrarySystem.doSearchBook()
+      elif choice==3:
+        LibrarySystem.doUpdateBook()
+      elif choice==4:
+        LibrarySystem.doDeleteBook()
+      else:
+        print("Invalid choice.")
+
+
+
+  def doAddBook():
+
+    print("\nADD BOOK")
+
+    found=True      
+    while found:
+      found=False      
+      id=input("Book ID: ")
+
+      with open(LibrarySystem.BOOKS_FILE) as file:      
+        while (line:=file.readline().rstrip()):
+          rec=line.split("|")
+          if id==rec[0]:
+            found=True
+            break
+
+      if found:
+        print("\nID already exist.")
+
+    name=input("Book name: ")
+    author=input("Book author: ")
+    available="true";
+
+    with open(LibrarySystem.BOOKS_FILE,"a") as file:      
+      file.write("{}|{}|{}|{}\n".format(id,name,author,available))
+
+    print("\nRecord added.")
+
+
+
+  def doSearchBook():
+    print("\nSEARCH BOOK")
+    search=input("Search Text: ")
+    print()
     
-    def logout(self):
-        if not self.logged_in_user:
-            print('You are not logged in.')
-            return
+    words=search.split(" ")
+    with open(LibrarySystem.BOOKS_FILE) as file:
+      notFound=True
+      while (line:=file.readline().rstrip()):
+        found=False
+        for word in words: 
+          if line.lower().find(word.lower())!=-1:
+            found=True
+            notFound=False
+            break
+        if found:
+          rec=line.split("|")
+          print("ID: {}".format(rec[0]))
+          print("Book name: {}".format(rec[1]))
+          print("Author: {}".format(rec[2]))
+          print("Available: {}\n".format(rec[3]))
+
+      if notFound:
+        print("Record not found.")   
+    
+
+
+  def doUpdateBook():
+    print("\nUPDATE BOOK")
+    id=int(input("Book ID: "))
+    print()
+
+    with open(LibrarySystem.BOOKS_FILE) as file:      
+      lines=[]
+      found=False
+      while (line:=file.readline().rstrip()):
+        rec=line.split("|")
+        if id==int(rec[0]):
+          found=True
+
+          print("ID: {}".format(rec[0]))
+          print("Book name: {}".format(rec[1]))
+          print("Author: {}\n".format(rec[2]))
+          
+          name=input("Update Book name: ")
+          author=input("Update Author: ")
+
+          available=""
+          while True:
+            print(
+              "\nUpdate Book is Available:\n"+
+              "1. Yes\n"+
+              "2. No\n"
+            )
+            choice=int(input("Choice: "))
+            if choice==1:
+              available="true"
+              break
+            elif choice==2:
+              available="false"
+              break
+            else:
+              print("Invalid choice.") 
+
+          lines.append("{}|{}|{}|{}".format(id,name,author,available))
+          
+        else:
+          lines.append(line)
+
+      if found:
+        with open(LibrarySystem.BOOKS_FILE,"w") as file:
+          for line in lines:
+            file.write("{}\n".format(line))
+        print("\nRecord updated.")
+      else:
+        print("\nRecord not found.")
+
+
+
+  def doDeleteBook():
+    print("\nDELETE BOOK")
+    id=int(input("Book ID: "))
+    print()
+
+    with open(LibrarySystem.BOOKS_FILE) as file:
+      lines=[]
+      found=False
+      while (line:=file.readline().rstrip()):
+        rec=line.split("|")
+        if id==int(rec[0]):
+          found=True
+        else:
+          lines.append(line)
+
+      if found:
+        with open(LibrarySystem.BOOKS_FILE,"w") as file:
+          for line in lines:
+            file.write("{}\n".format(line))
+        print("\nRecord is deleted.")
+      else:
+        print("\nRecord not found.")  
         
-        self.logged_in_user = None
-        print('Logged out.')
 
-def run_app():
-    app = MainApp()
-    app.librarian_main_menu()
 
-library = Library({"The Reader":[4,"Bernhard Schlink","120H",1995,218],
-                   "The Secret Garden":[3,"Frances Hodgson Burnett","121H",1911,375],
-                   "Number of Stars":[5,"Lois Lowry","122H",1989,137],
-                   "In Search of Lost of Time":[8,"Marcel Proust","123H",2003,165],
-                   "Ulysses": [5, "James Joyce", "124H", 2000, 188],
-                   "Don Quixote": [10, "Miguel de Cervantes", "125H", 2018, 105],
-                   "One Hundred of Solitude": [9, "Gabriel Garcia Marquez", "126H", 2020, 210],
-                   "War and Peace": [9, "Leo Tolstoy", "127H", 2020, 200],
-                   "Madame Bovary": [13, "Gustave Flubert", "128H", 2019, 250],
-                   "The Alchemist": [10, "Paulo Coelho", "129H", 2018, 200],
-                   "Atomic Habits": [10, "James Clear", "129H", 2020, 210],
-                   "Thinking Fast And Slow": [10, "Daniel Kahneman", "130H", 2011, 150],
-                   "The Four Agreements": [6, "Don Miguel Ruiz", "131H", 2019, 195],
-                   "The 7 Habits Of Highly Effective People": [6, "Stephen R. Covey", "132H", 2019, 123],
-                   "Best Self": [5, "Mike Bayer", "133H", 2018, 120]}, 
-                   "Mini E-Library")
+  def doBorrowerManagementMenu():
+    while True:
+      print(
+        "\nBorrower Management Menu:\n"+
+        "1. Search Borrower\n"+
+        "0. Back to Librarian Menu\n"
+      )
+      choice=int(input("Choice: "))
+      if choice==0:
+        break
+      elif choice==1:
+        LibrarySystem.doSearchBorrower()
+      else:
+        print("Invalid choice.")
 
-m1 = Member("@nobaisah_123","lyzel_9","jennyalmeniana","stephanieandal368@gmail.com","9982030680","NA","100")
 
-print("\t\t\t *======================================================*\n")
-print("\t\t         *|\t                                        \t|*\n")
-print("\t\t         *|\t                                        \t|*\n")
-print("\t\t         *|\t                                        \t|*\n")
-print("\t\t         *|\t\t      MINI E-LIBRARY\t\t\t|*\n")
-print("\t\t         *|\t      When in doubt go to the Libray.\t\t|*\n")
-print("\t\t         *|\t                                        \t|*\n")
-print("\t\t         *|\t                                        \t|*\n")
-print("\t\t         *|\t                                        \t|*\n")
-print("\t\t         *======================================================*\n")
-print("\n\t\t         Press Enter to Continue          ")
-input()
 
-def accMenu(): 
-  print("\n================================================")
-  print("\n\n================================================")
-  print("     [1] LIBRARIAN")
-  print("     [2] STUDENT")
-  print("     [3] EXIT")
-  print("\n\n================================================")
-  menuChoice = int(input("\n\nEnter your choice number: "))
-  if menuChoice == 1:
-   print("\n================================================")
-   print("\n\n             LIBRARIAN LOGIN ")
-   print("\n\n================================================")
-   run_app()
+  def doSearchBorrower():
+    print("\nSEARCH BORROWER")
+    id=int(input("User ID: "))
+    print()
 
-  if menuChoice == 2:
-     print("\n================================================")
-     print("\n\n            STUDENT LOGIN ")
-     print("\n\n================================================")
-     stdntUsern = str(input("USERNAME: "))
-     stdntPass = str(input("PASSWORD: "))
-     if stdntUsern == "stdntusern" and stdntPass == "stdntpass":
-                print("\n================================================")
-                print("\n\n               STUDENT MENU ")
-                print("\n\n==========================================")
-                print("\n     [1] VIEW BOOKS LIST")
-                print("\n     [2] BORROW BOOK")
-                print("\n     [3] RETURN BOOOK")
-                print("\n     [4] GO BACK TO ACCOUNTS MENU")
-                print("\n\n================================================")
-                stdntChoice = int(input("Enter your choice: "))
-                if stdntChoice == 1:
-                    print("Books present in {} are: ".format(library.name))
-                    library.displayAvailableBooks()
-                    print("\n")
-                    input()
-                    accMenu()
+    with open(LibrarySystem.PROFILES_FILE) as file0:
+      while (line0:=file0.readline().rstrip()):
+        rec0=line0.split("|")
+        if id==int(rec0[0]):
+          print("Name: {} {}".format(rec0[1],rec0[2]))
+          print("Address: {}\n".format(rec0[3]))
+          break
 
-                elif stdntChoice == 2:
-                   book = input("Please enter the name of the book you wanted to borrow: ")
-                   user = input("Please enter your Name: ")
-                   m1.borrowBook(library,book,user)
-                   print("\n")
-                   accMenu()
-
-                elif stdntChoice == 3:
-                   book = input("please Enter the name of the book you want to return :")
-                   user = input("please enter your name:")
-                   m1.returnBook(library,book,user)
-                   print("\n")
-                   accMenu()
-
-                elif stdntChoice == 4:
-                   accMenu()
-
+    count=0
+    with open(LibrarySystem.BORROWERS_FILE) as file1:
+      while (line1:=file1.readline().rstrip()):
+        rec1=line1.split("|")
+        if id==int(rec1[0]):
+          with open(LibrarySystem.BOOKS_FILE) as file2:
+            while (line2:=file2.readline().rstrip()):
+              rec2=line2.split("|")
+              if rec1[1]==rec2[0]:
+                count+=1 
+                if rec1[4]=="false":
+                  print("{}. Borrowed Book ID {} Title {} by {} at {} not yet Returned.\n".format(count,rec2[0],rec2[1],rec2[2],rec1[2]))
                 else:
-                    print("Error! Not a valid option")
-                    input()
-                    accMenu()
+                  print("{}. Borrowed Book ID {} Title {} by {} at {} and Returned at {}\n".format(count,rec2[0],rec2[1],rec2[2],rec1[2],rec1[3]))
 
-     else: 
-       print("\n\n    Invalid Login Details! \n    Press any key to try again.. ")
-       input()
-       accMenu()
 
-def libMenu():
- print("\n================================================")
- print("\n\n               LIBRARIAN MENU ")
- print("\n\n================================================")
- print("\n     [1] VIEW BOOKS LIST")
- print("\n     [2] ADD BOOKS")
- print("\n     [3] DELETE BOOKS")
- print("\n     [4] GO BACK TO ACCOUNTS MENU")
- print("\n\n================================================")
- libChoice = int(input("Enter your choice: "))
- if libChoice == 1:
-  print("Books present in {} are: ".format(library.name))
-  library.displayAvailableBooks()
-  print("\n")
-  input()
-  accMenu()
+  def doStudentMenu():
+    while True:
+      print(
+        "\nStudent Menu:\n"+
+        "1. Account Management\n"+
+        "2. Borrow/Return Book Management\n"+
+        "0. Back to Login\n"
+      )
+      choice=int(input("Choice: "))
+      if choice==0:
+        break
+      elif choice==1:
+        LibrarySystem.doAccountManagementMenu()
+      elif choice==2:
+        LibrarySystem.doBorrowReturnBookManagementMenu()
+      else:
+        print("Invalid choice.")
 
- elif libChoice == 2:
-  username = input("USERNAME: ")
-  password = input("PASSWORD: ")
-  libr = Librarian(username,password,"librusern","librpass")
-  print("\n")
-  book_name = input("Enter the name of the book you want to add: ")
-  quantity = int(input("Enter the quantity of book to add: "))
-  author = input("Enter the name of Author: ")
-  rack = input("Enter rack number: ")
-  publish_date = input("Enter the publish date: ")
-  pages = input("Enter the total number of page of book: ")
-  libr.add_book(library,quantity,author,rack,publish_date,pages)
-  print("\n")
-  input()
-  accMenu()
 
- elif libChoice == 3:
-  username = input("USERNAME: ")
-  password = input("PASSWORD: ")
-  libr = Librarian(username,password,"librusern","librpass")
-  print("\n")
-  book_name = input("Enter the name of the book you want to remove: ")
-  quantity = int(input("Enter quantity of book to remove: "))
-  author = input("Enter the name of Author: ")
-  rack = input("Enter rack number: ")
-  publish_date = input("Enter the publish date: ")
-  pages = input("Enter the total number of page: ")
-  libr.removeBook(library,book_name,quantity,author,rack,publish_date,pages)
-  print("\n")
-  input()
-  accMenu()
 
- elif libChoice == 4:
-   input()
-   accMenu()
+  def doAccountManagementMenu():
+    while True:
+      print(
+        "\nAccount Management Menu:\n"+
+        "1. Change Password\n"+
+        "2. View Profile\n"+
+        "3. Update Profile\n"+
+        "0. Back to Student Menu\n"
+      )
+      choice=int(input("Choice: "))
+      if choice==0:
+        break
+      elif choice==1:
+        LibrarySystem.doChangePassword()
+      elif choice==2:
+        LibrarySystem.doViewProfile()
+      elif choice==3:
+        LibrarySystem.doUpdateProfile()
+      else:
+        print("Invalid choice.")
 
-accMenu()
 
+
+  def doChangePassword():
+    print("\nChange Password:")
+    lines=[]
+    found=False
+    with open(LibrarySystem.USERS_FILE) as file:
+      while (line:=file.readline().rstrip()):
+        rec=line.split("|")
+        if LibrarySystem.user["id"]==int(rec[0]):
+          found=True
+          password=input("Update Password: ")
+          lines.append("{}|{}|{}|{}".format(rec[0],rec[1],password,rec[3]))
+        else:  
+          lines.append(line)
+    if found:
+      with open(LibrarySystem.USERS_FILE,"w") as file:
+        for line in lines:
+          file.write("{}\n".format(line))
+      print("Record updated.")
+    else:  
+      print("Record not found.")
+
+
+
+  def doViewProfile():
+    print("\nView Profile:\n")
+
+    with open(LibrarySystem.PROFILES_FILE) as file:      
+      lines=[]
+      found=False
+      while (line:=file.readline().rstrip()):
+        rec=line.split("|")
+        if LibrarySystem.user["id"]==int(rec[0]):
+          found=True
+
+          print("Firstname: {}".format(rec[1]))
+          print("Lastname: {}".format(rec[2]))
+          print("Address: {}\n".format(rec[3]))
+
+      if not found:
+        print("Record not found.")
+
+
+
+  def doUpdateProfile():
+    print("\nUpdate Profile:\n")
+
+    with open(LibrarySystem.PROFILES_FILE) as file:      
+      lines=[]
+      found=False
+      while (line:=file.readline().rstrip()):
+        rec=line.split("|")
+        if LibrarySystem.user["id"]==int(rec[0]):
+          found=True
+
+          print("Firstname: {}".format(rec[1]))
+          print("Lastname: {}".format(rec[2]))
+          print("Address: {}\n".format(rec[3]))
+
+          firstname=input("Update Firstname: ")
+          lastname=input("Update Lastname: ")
+          address=input("Update Address: ")
+
+          lines.append("{}|{}|{}|{}".format(LibrarySystem.user["id"],firstname,lastname,address))
+          
+        else:
+          lines.append(line)
+
+      if found:
+        with open(LibrarySystem.PROFILES_FILE,"w") as file:
+          for line in lines:
+            file.write("{}\n".format(line))
+      else:
+        print("ENTER PROFILE")  
+
+        firstname=input("Firstname: ")
+        lastname=input("Lastname: ")
+        address=input("Address: ")
+
+        with open(LibrarySystem.PROFILES_FILE,"a") as file:
+          file.write("{}|{}|{}|{}\n".format(LibrarySystem.user["id"],firstname,lastname,address))
+
+      print("Record updated.")  
+
+
+
+  def doBorrowReturnBookManagementMenu():
+    while True:
+      print(
+        "\nBorrow/Return Book Management Menu:\n"+
+        "1. Search Book\n"+
+        "2. Borrow a Book\n"+
+        "3. Return a Book\n"+
+        "0. Back to Student Menu\n"
+      )
+      choice=int(input("Choice: "))
+      if choice==0:
+        break
+      elif choice==1:
+        LibrarySystem.doSearchBook()
+      elif choice==2:
+        LibrarySystem.doBorrowABook()
+      elif choice==3:
+        LibrarySystem.doReturnABook()
+      else:
+        print("Invalid choice.")
+
+
+
+  def doBorrowABook():
+    print("\nBorrow a Book:\n")
+    id=input("Book ID: ")
+    print()
+
+    with open(LibrarySystem.BOOKS_FILE) as file:      
+      lines=[]
+      found=False
+      while (line:=file.readline().rstrip()):
+        rec=line.split("|")
+        if id==rec[0] and rec[3]=="true":
+          found=True
+
+          print("ID: {}".format(rec[0]))
+          print("Book name: {}".format(rec[1]))
+          print("Author: {}\n".format(rec[2]))
+
+          lines.append("{}|{}|{}|{}".format(rec[0],rec[1],rec[2],"false"))
+          
+        else:
+          lines.append(line)
+
+      if found:
+        with open(LibrarySystem.BOOKS_FILE,"w") as file:
+          for line in lines:
+            file.write("{}\n".format(line))
+
+        with open(LibrarySystem.BORROWERS_FILE,"a") as file:
+
+         user_id=LibrarySystem.user["id"]
+         book_id=id
+          
+         now=datetime.now()
+         date_borrowed=now.strftime("%Y-%m-%d %I:%M:%S %p")
+         date_returned="none"
+         returned="false"
+          
+         file.write("{}|{}|{}|{}|{}\n".format(user_id,book_id,date_borrowed,date_returned,returned))
+       
+         print("Book borrowed.")
+    
+      else:
+        print("Book is not available.")
+
+
+  def doReturnABook():
+    print("\nReturn a Book\n")
+    borrowed=[]
+    found=False
+    with open(LibrarySystem.BORROWERS_FILE) as file1:
+      while (line1:=file1.readline().rstrip()):
+        rec1=line1.split("|")
+        if LibrarySystem.user["id"]==int(rec1[0]):
+          with open(LibrarySystem.BOOKS_FILE) as file2:
+            while (line2:=file2.readline().rstrip()):
+              rec2=line2.split("|")
+              if rec1[1]==rec2[0] and rec1[4]=="false":
+                found=True
+                borrowed.append([rec2[1],rec2[2],rec1[1],rec1[2]])
+
+    if found:
+      print("{:>3} {:<40} {:<40} {:<8} {:<22}".format("###","Book Name","Book Author","Book ID","Borrowed Date"))
+      for i in range(len(borrowed)):
+        print("{:>3} {:<40} {:<40} {:<8} {:<22}".format(i+1,borrowed[i][0],borrowed[i][1],borrowed[i][2],borrowed[i][3]))
+
+      print()
+
+
+      book_id=input("Book ID to return: ")
+      
+      foundId=False
+      for book in borrowed:
+
+        if book_id==book[2]:
+          foundId=True  
+
+          dtfmt='%y/%m/%d %H:%M:%S.%f'
+          date_borrowed=datetime.strptime(book[3],dtfmt)  
+
+
+          date_returned=datetime.now()
+
+
+
+          # use this for testing date returned 
+          #date_returned=datetime.strptime("2022/12/3 11:14:00 PM",dtfmt)
+
+
+  
+          delta=date_returned-date_borrowed
+          str_date_returned=date_returned.strftime("%y-%m-%d %I:%M:%S %p")
+
+          if delta.days > 7:
+            fine = int(delta.days-7) * LibrarySystem.finePerDay
+            print("Books borrowed over a week must pay PHP {:.2f} per day fine.".format(LibrarySystem.finePerDay))
+
+            print("Over {} days so you must pay PHP {:.2f} fine.".format(int(delta.days-7),fine))
+
+          found=False
+          lines=[]
+          with open(LibrarySystem.BOOKS_FILE) as file3:
+            while (line3:=file3.readline().rstrip()):
+              rec3=line3.split("|")
+              if book_id==rec3[0]:
+                found=True
+                lines.append("{}|{}|{}|{}".format(rec3[0],rec3[1],rec3[2],"true"))
+              else:
+                lines.append(line3)
+          if found:
+            with open(LibrarySystem.BOOKS_FILE,"w") as file4:
+              for line in lines:
+                file4.write("{}\n".format(line))
+
+          found=False
+          lines=[]
+          with open(LibrarySystem.BORROWERS_FILE) as file5:
+            while (line5:=file5.readline().rstrip()):
+              rec5=line5.split("|")
+              if LibrarySystem.user["id"]==int(rec5[0]) and book_id==rec5[1]:
+                found=True
+                lines.append("{}|{}|{}|{}|{}".format(rec5[0],rec5[1],rec5[2],str_date_returned,"true"))
+              else:
+                lines.append(line5)
+
+          if found:
+            with open(LibrarySystem.BORROWERS_FILE,"w") as file6:
+              for line in lines:
+                file6.write("{}\n".format(line))
+
+      if foundId:
+        print("Book is returned.")
+      else:
+        print("Book not found.")
+
+    else:
+      print("No borrowed books.")
+
+
+
+LoginSystem.doLogin()
