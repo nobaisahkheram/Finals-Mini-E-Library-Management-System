@@ -284,9 +284,184 @@ class LibrarySystem:
         print("\nRecord is deleted.")
       else:
         print("\nRecord not found.")  
+      
+      
+def doBookManagementMenu():
+    while True:
+      print(
+        "\nBook Management Menu:\n"+
+        "1. List Books\n"+
+        "2. Add Book\n"+
+        "3. Search Book\n"+
+        "4. Update Book\n"+
+        "5. Delete Book\n"+
+        "0. Back to Librarian Menu\n"
+      )
+      choice=int(input("Choice: "))
+      if choice==0:
+        break
+      elif choice==1:
+        LibrarySystem.doListBooks()
+      elif choice==2:
+        LibrarySystem.doAddBook()
+      elif choice==3:
+        LibrarySystem.doSearchBook()
+      elif choice==4:
+        LibrarySystem.doUpdateBook()
+      elif choice==5:
+        LibrarySystem.doDeleteBook()
+      else:
+        print("Invalid choice.")
+
+
+
+  def doListBooks():
+    print("\nList Books:")
+    found=False
+    with open(LibrarySystem.BOOKS_FILE) as file:
+      while (line:=file.readline().rstrip()):
+        rec=line.split("|")
+        if not found:
+          print("{:<5} {:<40} {:<40} {:<9}".format("ID","Book Name","Book Author","Available"))
+          found=True
+        print("{:<5} {:<40} {:<40} {:<9}".format(rec[0],rec[1],rec[2],rec[3]))
+       
+
+
+  def doAddBook():
+
+    print("\nADD BOOK")
+
+    found=True      
+    while found:
+      found=False      
+      id=input("Book ID: ")
+
+      with open(LibrarySystem.BOOKS_FILE) as file:      
+        while (line:=file.readline().rstrip()):
+          rec=line.split("|")
+          if id==rec[0]:
+            found=True
+            break
+
+      if found:
+        print("\nID already exist.")
+
+    name=input("Book name: ")
+    author=input("Book author: ")
+    available="true";
+
+    with open(LibrarySystem.BOOKS_FILE,"a") as file:      
+      file.write("{}|{}|{}|{}\n".format(id,name,author,available))
+
+    print("\nRecord added.")
+
+
+
+  def doSearchBook():
+    print("\nSEARCH BOOK")
+    search=input("Search Text: ")
+    print()
+    
+    words=search.split(" ")
+    with open(LibrarySystem.BOOKS_FILE) as file:
+      notFound=True
+      while (line:=file.readline().rstrip()):
+        found=False
+        for word in words: 
+          if line.lower().find(word.lower())!=-1:
+            found=True
+            notFound=False
+            break
+        if found:
+          rec=line.split("|")
+          print("ID: {}".format(rec[0]))
+          print("Book name: {}".format(rec[1]))
+          print("Author: {}".format(rec[2]))
+          print("Available: {}\n".format(rec[3]))
+
+      if notFound:
+        print("Record not found.")   
+    
+
+
+  def doUpdateBook():
+    print("\nUPDATE BOOK")
+    id=int(input("Book ID: "))
+    print()
+
+    with open(LibrarySystem.BOOKS_FILE) as file:      
+      lines=[]
+      found=False
+      while (line:=file.readline().rstrip()):
+        rec=line.split("|")
+        if id==int(rec[0]):
+          found=True
+
+          print("ID: {}".format(rec[0]))
+          print("Book name: {}".format(rec[1]))
+          print("Author: {}\n".format(rec[2]))
+          
+          name=input("Update Book name: ")
+          author=input("Update Author: ")
+
+          available=""
+          while True:
+            print(
+              "\nUpdate Book is Available:\n"+
+              "1. Yes\n"+
+              "2. No\n"
+            )
+            choice=int(input("Choice: "))
+            if choice==1:
+              available="true"
+              break
+            elif choice==2:
+              available="false"
+              break
+            else:
+              print("Invalid choice.") 
+
+          lines.append("{}|{}|{}|{}".format(id,name,author,available))
+          
+        else:
+          lines.append(line)
+
+      if found:
+        with open(LibrarySystem.BOOKS_FILE,"w") as file:
+          for line in lines:
+            file.write("{}\n".format(line))
+        print("\nRecord updated.")
+      else:
+        print("\nRecord not found.")
+
+
+
+  def doDeleteBook():
+    print("\nDELETE BOOK")
+    id=int(input("Book ID: "))
+    print()
+
+    with open(LibrarySystem.BOOKS_FILE) as file:
+      lines=[]
+      found=False
+      while (line:=file.readline().rstrip()):
+        rec=line.split("|")
+        if id==int(rec[0]):
+          found=True
+        else:
+          lines.append(line)
+
+      if found:
+        with open(LibrarySystem.BOOKS_FILE,"w") as file:
+          for line in lines:
+            file.write("{}\n".format(line))
+        print("\nRecord is deleted.")
+      else:
+        print("\nRecord not found.")
         
         
-        def doBorrowReturnBookManagementMenu():
+def doBorrowReturnBookManagementMenu():
     while True:
       print(
         "\nBorrow/Return Book Management Menu:\n"+
