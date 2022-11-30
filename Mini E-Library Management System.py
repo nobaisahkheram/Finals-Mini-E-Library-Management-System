@@ -284,6 +284,167 @@ class LibrarySystem:
         print("\nRecord is deleted.")
       else:
         print("\nRecord not found.")  
+        
+        
+        def doBorrowReturnBookManagementMenu():
+    while True:
+      print(
+        "\nBorrow/Return Book Management Menu:\n"+
+        "1. List Books\n"+
+        "2. Search Book\n"+
+        "3. Borrow a Book\n"+
+        "4. Return a Book\n"+
+        "0. Back to Student Menu\n"
+      )
+      choice=int(input("Choice: "))
+      if choice==0:
+        break
+      elif choice==1:
+        LibrarySystem.doListBooks()
+      elif choice==2:
+        LibrarySystem.doSearchBook()
+      elif choice==3:
+        LibrarySystem.doBorrowABook()
+      elif choice==4:
+        LibrarySystem.doReturnABook()
+      else:
+        print("Invalid choice.")
+
+
+
+  def doBorrowABook():
+    print("\nBorrow a Book:\n")
+    id=input("Book ID: ")
+    print()
+
+    with open(LibrarySystem.BOOKS_FILE) as file:      
+      lines=[]
+      found=False
+      while (line:=file.readline().rstrip()):
+        rec=line.split("|")
+        if id==rec[0] and rec[3]=="true":
+          found=True
+
+          print("ID: {}".format(rec[0]))
+          print("Book name: {}".format(rec[1]))
+          print("Author: {}\n".format(rec[2]))
+
+          lines.append("{}|{}|{}|{}".format(rec[0],rec[1],rec[2],"false"))
+
+        else:
+          lines.append(line)
+
+      if found:
+        with open(LibrarySystem.BOOKS_FILE,"w") as file:
+          for line in lines:
+            file.write("{}\n".format(line))
+
+        with open(LibrarySystem.BORROWERS_FILE,"a") as file:
+
+         user_id=LibrarySystem.user["id"]
+         book_id=id
+          
+         now=datetime.now()
+         date_borrowed=now.strftime("%Y/%m/%d %I:%M:%S %p")
+         date_returned="none"
+         returned="false"
+          
+         file.write("{}|{}|{}|{}|{}\n".format(user_id,book_id,date_borrowed,date_returned,returned))
+       
+         print("Book borrowed.")
+    
+      else:
+        print("Book is not available.")
+
+
+  def doReturnABook():
+    print("\nReturn a Book\n")
+    borrowed=[]
+    found=False
+    with open(LibrarySystem.BORROWERS_FILE) as file1:
+      while (line1:=file1.readline().rstrip()):
+        rec1=line1.split("|")
+        if LibrarySystem.user["id"]==int(rec1[0]):
+          with open(LibrarySystem.BOOKS_FILE) as file2:
+            while (line2:=file2.readline().rstrip()):
+              rec2=line2.split("|")
+              if rec1[1]==rec2[0] and rec1[4]=="false":
+                found=True
+                borrowed.append([rec2[1],rec2[2],rec1[1],rec1[2]])
+
+    if found:
+      print("{:>3} {:<40} {:<40} {:<8} {:<22}".format("###","Book Name","Book Author","Book ID","Borrowed Date"))
+      for i in range(len(borrowed)):
+        print("{:>3} {:<40} {:<40} {:<8} {:<22}".format(i+1,borrowed[i][0],borrowed[i][1],borrowed[i][2],borrowed[i][3]))
+
+      print()
+
+
+      book_id=input("Book ID to return: ")
+      
+      foundId=False
+      for book in borrowed:
+
+        if book_id==book[2]:
+          foundId=True  
+
+          dtfmt="%Y/%m/%d %I:%M:%S %p"
+          date_borrowed=datetime.strptime(book[3],dtfmt)  
+
+          date_returned=datetime.now()
+
+
+          # use this for testing date returned 
+          #date_returned=datetime.strptime("2022/12/3 11:14:00 PM",dtfmt)
+
+
+          delta=date_returned-date_borrowed
+          str_date_returned=date_returned.strftime("%Y/%m/%d %I:%M:%S %p")
+
+          if delta.days > 7:
+            fine = int(delta.days-7) * LibrarySystem.finePerDay
+            print("Books borrowed over a week must pay PHP {:.2f} per day fine.".format(LibrarySystem.finePerDay))
+
+            print("Over {} days so you must pay PHP {:.2f} fine.".format(int(delta.days-7),fine))
+
+          found=False
+          lines=[]
+          with open(LibrarySystem.BOOKS_FILE) as file3:
+            while (line3:=file3.readline().rstrip()):
+              rec3=line3.split("|")
+              if book_id==rec3[0]:
+                found=True
+                lines.append("{}|{}|{}|{}".format(rec3[0],rec3[1],rec3[2],"true"))
+              else:
+                lines.append(line3)
+          if found:
+            with open(LibrarySystem.BOOKS_FILE,"w") as file4:
+              for line in lines:
+                file4.write("{}\n".format(line))
+
+          found=False
+          lines=[]
+          with open(LibrarySystem.BORROWERS_FILE) as file5:
+            while (line5:=file5.readline().rstrip()):
+              rec5=line5.split("|")
+              if LibrarySystem.user["id"]==int(rec5[0]) and book_id==rec5[1]:
+                found=True
+                lines.append("{}|{}|{}|{}|{}".format(rec5[0],rec5[1],rec5[2],str_date_returned,"true"))
+              else:
+                lines.append(line5)
+
+          if found:
+            with open(LibrarySystem.BORROWERS_FILE,"w") as file6:
+              for line in lines:
+                file6.write("{}\n".format(line))
+
+      if foundId:
+        print("Book is returned.")
+      else:
+        print("Book not found.")
+
+    else:
+      print("No borrowed books.")
 
 
         
