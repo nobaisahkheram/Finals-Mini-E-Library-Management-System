@@ -5,9 +5,11 @@ class LoginSystem:
 
   def doLogin():
     while True:
-      print("\nLOGIN")
-      username=input("Username: ")    
-      password=input("Password: ")
+      print("\n================================================"+
+                             "\n\t\t\tLOGIN"+
+             "\n================================================")
+      username=input("\t\tUsername: ")    
+      password=input("\t\tPassword: ")
 
       rec=""
       valid=False
@@ -22,13 +24,15 @@ class LoginSystem:
         LibrarySystem.user["id"]=int(rec[0])
         LibrarySystem.user["user"]=rec[1]
         LibrarySystem.user["role"]=rec[3]
-        print("\n    Access Granted. ")
+        print("\n\t\tAccess Granted. ")
+        print("\n================================================")
         if LibrarySystem.user["role"]=="librarian":
           LibrarySystem.doLibrarianMenu()
         else:
           LibrarySystem.doStudentMenu()
       else:
-        print("\n***** Access Denied *****")
+        print("\n\t\t***** Access Denied *****")
+        print("\n================================================")
 
 
 
