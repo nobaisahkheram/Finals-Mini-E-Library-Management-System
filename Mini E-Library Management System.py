@@ -6,10 +6,10 @@ class LoginSystem:
   def doLogin():
     while True:
       print("\n================================================"+
-                             "\n\t\t\tLOGIN"+
+                             "\n\t\t    LOGIN"+
              "\n================================================")
-      username=input("\t\tUsername: ")    
-      password=input("\t\tPassword: ")
+      username=input("\tUsername: ")    
+      password=input("\tPassword: ")
 
       rec=""
       valid=False
@@ -25,14 +25,12 @@ class LoginSystem:
         LibrarySystem.user["user"]=rec[1]
         LibrarySystem.user["role"]=rec[3]
         print("\n\t\tAccess Granted. ")
-        print("\n================================================")
         if LibrarySystem.user["role"]=="librarian":
           LibrarySystem.doLibrarianMenu()
         else:
           LibrarySystem.doStudentMenu()
       else:
-        print("\n\t\t***** Access Denied *****")
-        print("\n================================================")
+        print("\n\t  ***** Access Denied *****")
 
 
 
@@ -290,16 +288,19 @@ class LibrarySystem:
         print("\nRecord not found.")  
       
       
-def doBookManagementMenu():
+  def doBookManagementMenu():
     while True:
       print(
-        "\nBook Management Menu:\n"+
-        "1. List Books\n"+
-        "2. Add Book\n"+
-        "3. Search Book\n"+
-        "4. Update Book\n"+
-        "5. Delete Book\n"+
-        "0. Back to Librarian Menu\n"
+        "\n================================================"+
+        "\n\n             BOOK MANAGEMENT MENU\n"+
+        "\n================================================"+
+        "\n\n\t    [1] BOOK LIST"+
+        "\n\t    [2] ADD BOOK"+
+        "\n\t    [3] SEARCH BOOK"+
+        "\n\t    [4] UPDATE BOOK"+
+        "\n\t    [5] DELETE BOOK"+
+        "\n\t    [0] GO BACK TO LIBRARIAN MENU"+
+        "\n\n================================================"
       )
       choice=int(input("Choice: "))
       if choice==0:
@@ -463,19 +464,71 @@ def doBookManagementMenu():
         print("\nRecord is deleted.")
       else:
         print("\nRecord not found.")
-        
-        def doStudentMenu():
+      
+      
+  
+  def doBorrowerManagementMenu():
     while True:
       print(
         "\n================================================"+
-        "\n\n              STUDENT  MENU "+
-        "\n\n================================================"+
-        "\n\n\t    "1. Account Management\n"+
-        "\n\t      "2. Borrow/Return Book Management\n"+
-        "\n\t     "0. Back to Login\n"
-        "\n\t   
+        "\n\n             BORROWER MANAGEMENT MENU\n"+
+        "\n================================================"+
+        "\n\n\t    [1] SEARCH BORROWER"+
+        "\n\t    [0] GO BACK TO LIBRARIAN MENU"+
         "\n\n================================================"
       )
+      choice=int(input("Choice: "))
+      if choice==0:
+        break
+      elif choice==1:
+        LibrarySystem.doSearchBorrower()
+      else:
+        print("Invalid choice.")
+
+
+
+  def doSearchBorrower():
+    print("\nSEARCH BORROWER")
+    id=int(input("User ID: "))
+    print()
+
+    with open(LibrarySystem.PROFILES_FILE) as file0:
+      while (line0:=file0.readline().rstrip()):
+        rec0=line0.split("|")
+        if id==int(rec0[0]):
+          print("Name: {} {}".format(rec0[1],rec0[2]))
+          print("Address: {}\n".format(rec0[3]))
+          break
+
+    count=0
+    with open(LibrarySystem.BORROWERS_FILE) as file1:
+      while (line1:=file1.readline().rstrip()):
+        rec1=line1.split("|")
+        if id==int(rec1[0]):
+          with open(LibrarySystem.BOOKS_FILE) as file2:
+            while (line2:=file2.readline().rstrip()):
+              rec2=line2.split("|")
+              if rec1[1]==rec2[0]:
+                count+=1 
+                if rec1[4]=="false":
+                  print("{}. Borrowed Book ID {} Title {} by {} at {} not yet Returned.\n".format(count,rec2[0],rec2[1],rec2[2],rec1[2]))
+                else:
+                  print("{}. Borrowed Book ID {} Title {} by {} at {} and Returned at {}\n".format(count,rec2[0],rec2[1],rec2[2],rec1[2],rec1[3]))
+
+                  
+
+  def doStudentMenu():
+    while True:
+      print(
+        "\n================================================"+
+        "\n\n                STUDENT  MENU\n"+
+        "\n================================================"+
+        "\n\n\t  [1] ACCOUNT MANAGEMENT"+
+        "\n\t  [2] BORROW\RETURN BOOK MANAGEMENT"+
+        "\n\t  [0] GO BACK TO LOGIN"+
+        "\n\n================================================"
+      )
+      
       choice=int(input("Choice: "))
       if choice==0:
         break
@@ -486,16 +539,19 @@ def doBookManagementMenu():
       else:
         print("Invalid choice.")
 
-
+        
 
   def doAccountManagementMenu():
     while True:
       print(
-        "\nAccount Management Menu:\n"+
-        "1. Change Password\n"+
-        "2. View Profile\n"+
-        "3. Update Profile\n"+
-        "0. Back to Student Menu\n"
+        "\n================================================"+
+        "\n\n            ACCOUNT MANAGEMENT MENU\n"+
+        "\n================================================"+
+        "\n\n\t    [1] CHANGE PASSWORD"+
+        "\n\t    [2] VIEW PROFILE"+
+        "\n\t    [3] UPDATE PROFILE"+
+        "\n\t    [0] GO BACK TO STUDENT MENU"+
+        "\n\n================================================"
       )
       choice=int(input("Choice: "))
       if choice==0:
@@ -593,19 +649,20 @@ def doBookManagementMenu():
           file.write("{}|{}|{}|{}\n".format(LibrarySystem.user["id"],firstname,lastname,address))
 
       print("Record updated.")
+  
+  
         
-        
-def doBorrowReturnBookManagementMenu():
+  def doBorrowReturnBookManagementMenu():
     while True:
       print(
-         "\n================================================"+
-        "\n\n    Borrow/Return Book Management Menu"+
-        "\n\n================================================"+
-        "\n\n\t     "1. List Books\n"+
-        "\n\n\t    "2. Search Book\n"+
-        "\n\t      "3. Borrow a Book\n"+
-        "\n\t      "4. Return a Book\n"+
-        "\n\n\t   "0. Back to Student Menu\n"
+        "\n================================================"+
+        "\n\n       BORROW\RETURN BOOK MANAGEMENT MENU\n"+
+        "\n================================================"+
+        "\n\n\t    [1] BOOK LIST"+
+        "\n\t    [2] SEARCH BOOK"+
+        "\n\t    [3] BORROW BOOK"+
+        "\n\t    [4] RETURN BOOK"+
+        "\n\t    [0] GO BACK TO STUDENT MENU"+
         "\n\n================================================"
      )
       choice=int(input("Choice: "))
