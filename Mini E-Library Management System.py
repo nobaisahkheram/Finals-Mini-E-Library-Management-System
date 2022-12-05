@@ -468,7 +468,7 @@ def doBookManagementMenu():
     while True:
       print(
         "\n================================================"+
-        "\n\n              LIBRARIAN MENU "+
+        "\n\n              STUDENT  MENU "+
         "\n\n================================================"+
         "\n\n\t    "1. Account Management\n"+
         "\n\t      "2. Borrow/Return Book Management\n"+
