@@ -464,17 +464,150 @@ def doBookManagementMenu():
       else:
         print("\nRecord not found.")
         
+        def doStudentMenu():
+    while True:
+      print(
+        "\n================================================"+
+        "\n\n              LIBRARIAN MENU "+
+        "\n\n================================================"+
+        "\n\n\t    "1. Account Management\n"+
+        "\n\t      "2. Borrow/Return Book Management\n"+
+        "\n\t     "0. Back to Login\n"
+        "\n\t   
+        "\n\n================================================"
+      )
+      choice=int(input("Choice: "))
+      if choice==0:
+        break
+      elif choice==1:
+        LibrarySystem.doAccountManagementMenu()
+      elif choice==2:
+        LibrarySystem.doBorrowReturnBookManagementMenu()
+      else:
+        print("Invalid choice.")
+
+
+
+  def doAccountManagementMenu():
+    while True:
+      print(
+        "\nAccount Management Menu:\n"+
+        "1. Change Password\n"+
+        "2. View Profile\n"+
+        "3. Update Profile\n"+
+        "0. Back to Student Menu\n"
+      )
+      choice=int(input("Choice: "))
+      if choice==0:
+        break
+      elif choice==1:
+        LibrarySystem.doChangePassword()
+      elif choice==2:
+        LibrarySystem.doViewProfile()
+      elif choice==3:
+        LibrarySystem.doUpdateProfile()
+      else:
+        print("Invalid choice.")
+
+
+
+  def doChangePassword():
+    print("\nChange Password:")
+    lines=[]
+    found=False
+    with open(LibrarySystem.USERS_FILE) as file:
+      while (line:=file.readline().rstrip()):
+        rec=line.split("|")
+        if LibrarySystem.user["id"]==int(rec[0]):
+          found=True
+          password=input("Update Password: ")
+          lines.append("{}|{}|{}|{}".format(rec[0],rec[1],password,rec[3]))
+        else:  
+          lines.append(line)
+    if found:
+      with open(LibrarySystem.USERS_FILE,"w") as file:
+        for line in lines:
+          file.write("{}\n".format(line))
+      print("Record updated.")
+    else:  
+      print("Record not found.")
+
+
+
+  def doViewProfile():
+    print("\nView Profile:\n")
+
+    with open(LibrarySystem.PROFILES_FILE) as file:      
+      lines=[]
+      found=False
+      while (line:=file.readline().rstrip()):
+        rec=line.split("|")
+        if LibrarySystem.user["id"]==int(rec[0]):
+          found=True
+
+          print("Firstname: {}".format(rec[1]))
+          print("Lastname: {}".format(rec[2]))
+          print("Address: {}\n".format(rec[3]))
+
+      if not found:
+        print("Record not found.")
+
+
+
+  def doUpdateProfile():
+    print("\nUpdate Profile:\n")
+
+    with open(LibrarySystem.PROFILES_FILE) as file:      
+      lines=[]
+      found=False
+      while (line:=file.readline().rstrip()):
+        rec=line.split("|")
+        if LibrarySystem.user["id"]==int(rec[0]):
+          found=True
+
+          print("Firstname: {}".format(rec[1]))
+          print("Lastname: {}".format(rec[2]))
+          print("Address: {}\n".format(rec[3]))
+
+          firstname=input("Update Firstname: ")
+          lastname=input("Update Lastname: ")
+          address=input("Update Address: ")
+
+          lines.append("{}|{}|{}|{}".format(LibrarySystem.user["id"],firstname,lastname,address))
+          
+        else:
+          lines.append(line)
+
+      if found:
+        with open(LibrarySystem.PROFILES_FILE,"w") as file:
+          for line in lines:
+            file.write("{}\n".format(line))
+      else:
+        print("ENTER PROFILE")  
+
+        firstname=input("Firstname: ")
+        lastname=input("Lastname: ")
+        address=input("Address: ")
+
+        with open(LibrarySystem.PROFILES_FILE,"a") as file:
+          file.write("{}|{}|{}|{}\n".format(LibrarySystem.user["id"],firstname,lastname,address))
+
+      print("Record updated.")
+        
         
 def doBorrowReturnBookManagementMenu():
     while True:
       print(
-        "\nBorrow/Return Book Management Menu:\n"+
-        "1. List Books\n"+
-        "2. Search Book\n"+
-        "3. Borrow a Book\n"+
-        "4. Return a Book\n"+
-        "0. Back to Student Menu\n"
-      )
+         "\n================================================"+
+        "\n\n    Borrow/Return Book Management Menu"+
+        "\n\n================================================"+
+        "\n\n\t     "1. List Books\n"+
+        "\n\n\t    "2. Search Book\n"+
+        "\n\t      "3. Borrow a Book\n"+
+        "\n\t      "4. Return a Book\n"+
+        "\n\n\t   "0. Back to Student Menu\n"
+        "\n\n================================================"
+     )
       choice=int(input("Choice: "))
       if choice==0:
         break
