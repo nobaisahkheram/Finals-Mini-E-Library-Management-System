@@ -54,3 +54,100 @@ def Menu():
             user = input("\t\t\tEnter your name: ")
             m1.check_fine(library,book,user)
             print("\n")
+        
+        elif user_choice == 5:
+            users ={}
+            status = " "
+            def displayMenu():
+                status = input("\n\t\t\tAre You Registered User? [Y/N] ")
+                if status == "Y":
+                    oldUser()
+                    print("\n")
+                elif status == "y":
+                    oldUser()
+                    print("\n")
+                elif status == "N":
+                    newUser()
+                    print("\n")
+                elif status == "n":
+                    newUser()
+                    print("\n")
+                else:
+                    print("\n\t\t\tInvalid input")
+                    displayMenu()
+            def newUser():
+                username = input ("\n\t\t\tCreate Username: ")
+                
+                if username in users:
+                    print("\n\t\t\tUsername Already Exist!")
+                    
+                else:
+                    createPassw= input ("\t\t\tCreate Password: ")
+                    users[username] = createPassw
+                    print("\n\t\t\tSuccess! User Created.") 
+                while status != "Q":
+                    displayMenu()    
+            def oldUser():
+                username = input("\t\t\tUSERNAME: ")
+                password = input("\t\t\tPASSWORD: ")   
+                if username in users and users[username] == password:
+                    libr = Librarian(username,password,"nostelynny")
+                    print("\n\t\t\tLOGIN SUCCESFULLY!\n")
+                    print("\t\t\tYou can now add book in library\n")
+                    book_name = input("\n\t\t\tEnter the name of the book you want to add: ")
+                    quantity = int(input("\t\t\tEnter quantity of book to add: "))
+                    author = input("\t\t\tEnter the name of author: ")
+                    rack = input("\t\t\tEnter rack number: ")
+                    publish_date = input("\t\t\tEnter the Publish Date: ")
+                    pages = input("\t\t\tEnter the total number of page of book: ")
+                    libr.add_book(library,book_name,quantity,author,rack,publish_date,pages)
+                    print("\n")
+                else:
+                    print("\n\t\t\tUser doesn't exist. Please check your entered Username and Password")
+                    print("\n")
+             
+                while status != "Q": 
+                 print("Press Q to quit or C to conitinue")
+                 choice = ""
+                 while(choice!= "C" and choice != "Q"):
+                  choice = input()
+                 if choice == "C":
+                  Menu()
+                 elif choice == "Q":
+                  sys.exit()
+
+            displayMenu()
+        
+        elif user_choice == 6:
+            users ={}
+            status = " "
+            def displayMenu():
+                status = input("\n\t\t\tAre You Registered User? Y/N? ")
+                
+                if status == "Y":
+                    oldUser()
+                    print("\n")
+                elif status == "y":
+                    oldUser()
+                    print("\n")
+                elif status == "N":
+                    newUser()
+                    print("\n")
+                elif status == "n":
+                    newUser()
+                    print("\n")
+                else:
+                    print("\t\t\tInvalid input")
+                    print("\n")
+                    displayMenu()
+            def newUser():
+                username = input ("\t\t\tCreate Username: ")
+                if username in users:
+                    print("\t\t\tUsername Already Exist!")
+                    print("\n")
+                else:
+                    createPassw= input ("\t\t\tCreate Password: ")
+                    users[username] = createPassw
+                    print("\t\t\tSuccess! User Created.")
+                while status != "Q":
+                    displayMenu()
