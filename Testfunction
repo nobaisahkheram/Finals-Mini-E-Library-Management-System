@@ -151,3 +151,46 @@ def Menu():
                     print("\t\t\tSuccess! User Created.")
                 while status != "Q":
                     displayMenu()
+                    
+            def oldUser():
+                username = input("\t\t\tUSERNAME: ")
+                password = input("\t\t\tPASSWORD: ")   
+                if username in users and users[username] == password:
+                    libr = Librarian(username,password,"nostelynny")
+                    print("\n\t\t\tLOGIN SUCCESSFULLY!\n")
+                    print("\t\t\tYou can now remove book from library")
+                    print("\n")
+                    book_name = input("\t\t\tEnter the name of the book you want to remove: ")
+                    quantity = int(input("\t\t\tEnter quantity of book to remove: "))
+                    author = input("\t\t\tEnter the name of author: ")
+                    rack = input("\t\t\tEnter rack number: ")
+                    publish_date = input("\t\t\tEnter the Publish Date: ")
+                    pages = input("\t\t\tEnter the total number of page: ")
+                    libr.removeBook(library,book_name,quantity,author,rack,publish_date,pages)
+                    print("\n")
+                else:
+                    print("\n\t\t\tUser doesn't exist. Please check your entered Username and Password")
+                    print("\n")
+
+                while status != "Q": 
+                 print("Press Q to Quit or C to Continue")
+                 choice = ""
+                 while(choice!= "C" and choice != "Q"):
+                    choice = input()
+                 if choice == "C":
+                  Menu()
+                 elif choice == "Q":
+                  sys.exit()
+
+            displayMenu() 
+    
+    print("Press Q to Quit or C to Conitinue")
+    choice = ""
+    while(choice!= "C" and choice != "Q"):
+        choice = input()
+    if choice == "C":
+     Menu()
+    elif choice == "Q":
+     sys.exit()    
+          
+Menu()        
