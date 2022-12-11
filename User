@@ -71,3 +71,51 @@ class Member(User):
                 print("\n\t\t\tBook sucessfully returned. Thank you")
         else:
             print("\n\t\t\tPlease provide correct username and book name")
+            
+            
+    def check_previous_fine(self,book,user):
+        current_date = date.today()
+        for key,value in self.bookdict.items():
+            if key[1]==user:
+                return_date = self.bookdict[key]
+                if current_date > return_date:
+                    delay_days = (current_date - return_date).days
+                    total_fine = delay_days*10
+                    return total_fine
+                else:
+                    return 0 
+
+            
+    def payment(self,library,book,user):
+        print("\n\t\t\tFor payment process. Enter your choice")
+        choice = input("[Yes/No]: ")
+        if choice == "Yes":
+            print("\n\t\t\tYour payment is processing....")
+            input()
+            print("\n\t\t\tPayment successful")
+            self.max_book_count[user].remove(book)
+            self.bookdict.pop((book,user))
+            library.Count_book_dict[book][0] += 1
+        else:
+            print("\n\t\t\tWe are redirecting you to Homepage")
+            input()
+            
+            
+    def check_fine(self,library,book,user):
+        if (book,user)in self.bookdict.keys():
+            return_date =  self.bookdict[(book,user)]
+            current_date = date.today()
+            if current_date > return_date:
+                delay_days = (current_date - return_date).days
+                total_fine = delay_days*10
+                print("\n\t\t\tPlease pay fine,you have to pay {} pesos" .format(total_fine))
+                print("\t\t\tDo you want to pay fine now? ")
+                choice = input("[Yes/No]")
+                if choice == "Yes":
+                    self.payment(library,book,user)
+                else:
+                    print("\t\t\tWe are redirecting to Homepage")
+            else:
+                print("\n\t\t\tYou don't need to pay fine")
+        else:
+            print("\n\t\t\tEnter correct information")
