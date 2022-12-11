@@ -1,0 +1,73 @@
+from datetime import date,timedelta
+
+class User:
+    def __init__(self,username,password,user):
+        self.username = username
+        self.password = password
+        self.user = user
+        
+class Member(User):
+    def __init__(self,username,password,user):
+        super().__init__(username,password,user)
+        self.max_book_count = {}
+        self.bookdict = {}
+        
+    def Count_book(self,user,book):
+        if user not in self.max_book_count:
+            self.max_book_count[user] = [book]
+            return len(self.max_book_count[user])
+        else:
+            if len(self.max_book_count[user])<=4:
+                self.max_book_count[user].append(book)
+                return len(self.max_book_count[user])
+            else:
+                return len(self.max_book_count[user])
+            
+    def borrowBook(self,library,book,user):
+    # Issuing book to the user by cross verifying libray stock and user can issue only one book of particular subject
+    # maintaining record   
+            if book in library.Count_book_dict.keys():
+                if library.Count_book_dict[book][0]>=1:
+                    if (book,user) not in self.bookdict.keys():
+                        if not self.check_previous_fine(book,user):
+                            if self.Count_book(user,book)<=5:
+                                borrowDate = date.today()
+                                return_date = date.today()+timedelta(days = 10)
+                                self.bookdict.update({(book,user):return_date})
+                                library.Count_book_dict[book][0] -= 1
+                                for value in self.bookdict.keys():
+                                    if value == (book,user):
+                                        print("\n\t\t\t{} book is issued to your name {} on {}. You can now get the book".format(value[0],value[1],borrowDate))
+                                        print("\t\tYou have 10 days to read book. Please return book on time otherwise 10 pesos/day fine will be charge.")
+                                        print("\n\t\t\t", self.max_book_count)
+                            else:
+                                print("\n\t\t\tYou can issue maximum 5 books only")
+                        else:
+                            print("\n\t\t\tSorry! You have to pay fine first to borrow book")
+                    else:
+                        print("\n\t\t\tSorry! This book is already issued to your name")
+                else:
+                    print("\n\t\t\tSorry! This book is out of stock")
+            else:
+                print("\n\t\t\tSorry, this book is not available")
+            
+   
+    def return_book(self,library,book,user):
+# return book,updating records and if dealy then charge fine 10rs/day.
+        if (book,user)in self.bookdict.keys():
+            return_date =  self.bookdict[(book,user)]
+            current_date = date.today()
+            if current_date > return_date:
+                delay_days = (current_date - return_date).days
+                total_fine = delay_days*10
+                print("\n\t\t\tPlease pay fine, you have to pay {} pesos" .format(total_fine))
+                input()
+                print("\n\t\t\twWe are redirecting you on payment page")
+                self.payment(library,book,user)
+            else:
+                self.max_book_count[user].remove(book)
+                self.bookdict.pop((book,user))
+                library.Count_book_dict[book][0] += 1
+                print("\n\t\t\tBook sucessfully returned. Thank you")
+        else:
+            print("\n\t\t\tPlease provide correct username and book name")
