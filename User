@@ -24,8 +24,8 @@ class Member(User):
                 return len(self.max_book_count[user])
             
     def borrowBook(self,library,book,user):
-    # Issuing book to the user by cross verifying libray stock and user can issue only one book of particular subject
-    # maintaining record   
+    #Issuing book to the user by cross verifying libray stock and user can issue only one book of particular subject
+    #maintaining record   
             if book in library.Count_book_dict.keys():
                 if library.Count_book_dict[book][0]>=1:
                     if (book,user) not in self.bookdict.keys():
