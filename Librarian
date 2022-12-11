@@ -2,7 +2,7 @@ from User import User
 class Librarian(User):
               
     def add_book(self,library,book_name,quantity,author,rack,publish_date,pages):
-# add new_book in the library
+#add new_book in the library
         if quantity>0:
             if book_name in library.Count_book_dict.keys():
                 library.Count_book_dict[book_name][0]+=quantity
