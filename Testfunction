@@ -2,6 +2,23 @@ import sys
 from Library import Library
 from User import Member
 from Librarian import Librarian
+library = Library({"The Reader":[4,"Bernhard Schlink","120H",1995,218],
+                   "The Secret Garden":[3,"Frances Hodgson Burnett","121H",1911,375],
+                   "Number of Stars":[5,"Lois Lowry","122H",1989,137],
+                   "In Search of Lost of Time":[8,"Marcel Proust","123H",2003,165],
+                   "Ulysses": [5, "James Joyce", "124H", 2000, 188],
+                   "Don Quixote": [10, "Miguel de Cervantes", "125H", 2018, 105],
+                   "One Hundred of Solitude": [9, "Gabriel Garcia Marquez", "126H", 2020, 210],
+                   "War and Peace": [9, "Leo Tolstoy", "127H", 2020, 200],
+                   "Madame Bovary": [13, "Gustave Flubert", "128H", 2019, 250],
+                   "The Alchemist": [10, "Paulo Coelho", "129H", 2018, 200],
+                   "Atomic Habits": [10, "James Clear", "129H", 2020, 210],
+                   "Thinking Fast And Slow": [10, "Daniel Kahneman", "130H", 2011, 150],
+                   "The Four Agreements": [6, "Don Miguel Ruiz", "131H", 2019, 195],
+                   "The 7 Habits Of Highly Effective People": [6, "Stephen R. Covey", "132H", 2019, 123],
+                   "Best Self": [5, "Mike Bayer", "133H", 2018, 120]},
+                   "Mini E-Library Management System")
+m1 = Member("@nobaisah_123","jenny_9","lyzelAndal")
 
 print(3*'\t ', 54 * '=')
 print("\t\t         *|\t                                        \t|*\n")
