@@ -26,7 +26,7 @@ print("\t\t         *|\t\t      MINI E-LIBRARY\t\t\t|*\n")
 print("\t\t         *|\t      When in doubt go to the Libray.\t\t|*\n")
 print("\t\t         *|\t                                        \t|*\n")
 print(3*'\t ', 54 * '=')
-print("\n\t\t\t       Press Enter to Continue          ")
+print("\n\t\t\t       Press Enter to Continue           ")
 input()
 
 def Menu():
