@@ -1,0 +1,32 @@
+from User import User
+class Librarian(User):
+              
+    def add_book(self,library,book_name,quantity,author,rack,publish_date,pages):
+# add new_book in the library
+        if quantity>0:
+            if book_name in library.Count_book_dict.keys():
+                library.Count_book_dict[book_name][0]+=quantity
+            else:
+                library.Count_book_dict.update({book_name:[quantity,author,rack,publish_date,pages]})
+                print("\n\t\t\tBook has been succesfully added to the Library.")
+        else:
+            print("\n\t\t\tError! Please enter positive integer for quantity of book.")
+            
+            
+    def removeBook(self,library,book_name,quantity,author,rack,publish_date,pages):
+        if quantity>0:
+            if book_name in library.Count_book_dict.keys():
+                if library.Count_book_dict[book_name][0]>=1:
+                    library.Count_book_dict[book_name][0]-=quantity
+                    if library.Count_book_dict[book_name][0] < 0:
+                        library.Count_book_dict[book_name][0]+=quantity
+                        print("\n\t\t\tError! Please enter correct quantity of book. We only have {} books of {}".format(library.Count_book_dict[book_name][0],book_name))
+                    else:
+                        print("\n\t\t\tGreat! Book has been succesfully removed.")
+                else:
+                    library.Count_book_dict.pop(book_name)
+                    print("\n\t\t\tSorry, We don't have any books of {} in our Library".format(book_name))
+            else:
+                print("\n\t\t\tSorry, We don't have any books of {} in our Library".format(book_name))
+        else:
+            print("\n\t\t\tError! Please enter positive integer for quantity of book.")
