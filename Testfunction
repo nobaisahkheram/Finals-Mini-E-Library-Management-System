@@ -49,4 +49,8 @@ def Menu():
             m1.return_book(library,book,user)
             print("\n")
             
-        
+        elif user_choice == 4:
+            book = input("\n\t\t\tEnter the book name having fine: ")
+            user = input("\t\t\tEnter your name: ")
+            m1.check_fine(library,book,user)
+            print("\n")
