@@ -1,0 +1,52 @@
+import sys
+from Library import Library
+from User import Member
+from Librarian import Librarian
+
+print(3*'\t ', 54 * '=')
+print("\t\t         *|\t                                        \t|*\n")
+print("\t\t         *|\t\t      MINI E-LIBRARY\t\t\t|*\n")
+print("\t\t         *|\t      When in doubt go to the Libray.\t\t|*\n")
+print("\t\t         *|\t                                        \t|*\n")
+print(3*'\t ', 54 * '=')
+print("\n\t\t\t       Press Enter to Continue          ")
+input()
+
+def Menu():
+    print(3*'\t ', 54 * '=')
+    print("\n\t", 5*'\t ',"MENU ")
+    print(3*'\t ', 54 * '=')
+    print("\n", 4*'\t', "[1] VIEW BOOKS LIST")
+    print("\n", 4*'\t', "[2] BORROW BOOK")
+    print("\n", 4*'\t', "[3] RETURN BOOOK")
+    print("\n", 4*'\t', "[4] PAY FINE\n")
+    print(3*'\t ', 54 * '=')
+    print("\n", 4*'\t ', "This is for Librarian access only.")
+    print("\n", 4*'\t', "[5] ADD BOOK")
+    print("\n", 4*'\t', "[6] REMOVE BOOK\n")
+    print(3*'\t ', 54 * '=')
+
+    user_choice = input('\n\t\t\tEnter your choice: ')
+    if user_choice not in ["1","2","3","4","5","6","7","8"]:
+        print("\n\t\t\tError! Invalid input \n")
+        Menu() 
+    else:
+        user_choice = int(user_choice)
+        if user_choice == 1:
+            print("\nWe have following books in {}: \n".format(library.name))
+            library.display_books()
+            print("\n")
+
+        elif user_choice == 2:
+            book = input("\n\t\t\tEnter the book name you want to borrow: ")
+            user = input("\t\t\tEnter your name: ")
+            m1.borrowBook(library,book,user)
+            print("\n")
+
+        elif user_choice == 3:
+            book = input("\n\t\t\tEnter the book name you want to return: ")
+            user = input("\t\t\tEnter your name: ")
+            m1.return_book(library,book,user)
+            print("\n")
+            
+        
