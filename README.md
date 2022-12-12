@@ -51,7 +51,7 @@ For more clear display, you can view it [here](https://viewer.diagrams.net/?tags
 | Metric                     |       Score        | Explanation                                                                |
 |--------------------------  | ------------------ | ---------------------------------------------------------------------------|
 | CODE REUSABILITY           | 4                  | We practice DRY by using Inheritance principle leading to a shorter and cleaner structure of our program compare as before
-| MAINTABILITY               | 3                  | We can't say it's excellent as we are newbie and not that skilled with implementing much OOP principles but can say that are codes are readable and understandable aiding to its maintability                       |
+| MAINTABILITY               | 3                  | We can't say it's excellent as other Library Management Sysytem as we are a newbie but can say that our codes are readable and understandable aiding to its maintability                       |
 | SCALABILITY                | 3                  | Program can handle immediate changes or update of feauture add-ons          |
 | EXECUTION                  | 3                  | Program works completely as intended and declared. Errors are handled properly|
 | ORIGINALITY                | 3                  | Concept is quite similar to some samples but confidently have a unique code logic |
