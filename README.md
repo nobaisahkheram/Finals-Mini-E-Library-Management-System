@@ -72,9 +72,9 @@ For more clear display, you can view it [here](https://viewer.diagrams.net/?tags
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
-<a href="https://twitter.com/@nsmpga_" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="@nsmpga_" height="30" width="40" /></a>
-<a href="https://facebook.com/nobaysaganda" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/facebook.svg" alt="nobaisah Sampaga II" height="30" width="40" /></a>
-<a href="https://instagram.com/@n.khrm_" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="@n.khrm_" height="30" width="40" /></a>
+<a href="https://mobile.twitter.com/nsmpga_" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="@nsmpga_" height="30" width="40" /></a>
+<a href="https://www.facebook.com/gandanobaysa/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/facebook.svg" alt="nobaisah Sampaga II" height="30" width="40" /></a>
+<a href="https://www.instagram.com/n.khrm_/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="@n.khrm_" height="30" width="40" /></a>
 </p>
 
 <h3 align="left">Languages and Tools:</h3>
@@ -96,9 +96,9 @@ For more clear display, you can view it [here](https://viewer.diagrams.net/?tags
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
-<a href="https://twitter.com/@lydozzz" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="@lydozzz" height="30" width="40" /></a>
+<a href="https://twitter.com/lydozzz" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="@lydozzz" height="30" width="40" /></a>
 <a href="https://facebook.com/profile.php?id=100014323146629&mibextid=zbwkwl" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/facebook.svg" alt="profile.php?id=100014323146629&mibextid=zbwkwl" height="30" width="40" /></a>
-<a href="https://instagram.com/@ly_dozzz" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="@ly_dozzz" height="30" width="40" /></a>
+<a href="https://instagram.com/ly_dozzz" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="@ly_dozzz" height="30" width="40" /></a>
 </p>
 
 <h3 align="left">Languages and Tools:</h3>
@@ -120,8 +120,8 @@ For more clear display, you can view it [here](https://viewer.diagrams.net/?tags
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
-<a href="https://facebook.com/profile.php?id=100014323146629&mibextid=zbwkwl" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/facebook.svg" alt="profile.php?id=100014323146629&mibextid=zbwkwl" height="30" width="40" /></a>
-<a href="https://instagram.com/@jnny_lmnn" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="@jnny_lmnn" height="30" width="40" /></a>
+<a href="https://www.facebook.com/almeniana.jenny?mibextid=ZbWKwL" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/facebook.svg" alt="profile.php?id=100014323146629&mibextid=zbwkwl" height="30" width="40" /></a>
+<a href="https://instagram.com/jnny_lmnn" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="@jnny_lmnn" height="30" width="40" /></a>
 </p>
 
 <h3 align="left">Languages and Tools:</h3>
@@ -144,8 +144,8 @@ For more clear display, you can view it [here](https://viewer.diagrams.net/?tags
 <h3 align="left">Connect with me:</h3>
 <p align="left">
 <a href="https://twitter.com/stephywephyyy" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="stephywephyyy" height="30" width="40" /></a>
-<a href="https://facebook.com/einapets.andal?mibextid=zbwkwl" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/facebook.svg" alt="einapets.andal?mibextid=zbwkwl" height="30" width="40" /></a>
-<a href="https://instagram.com/@stephanieeinaandal" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="@stephanieeinaandal" height="30" width="40" /></a>
+<a href="https://www.facebook.com/einapets.andal?mibextid=ZbWKwL" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/facebook.svg" alt="einapets.andal?mibextid=zbwkwl" height="30" width="40" /></a>
+<a href="https://instagram.com/stephanieeinaandal" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="@stephanieeinaandal" height="30" width="40" /></a>
 </p>
 
 <h3 align="left">Languages and Tools:</h3>
