@@ -131,7 +131,7 @@ For more clear display, you can view it [here](https://viewer.diagrams.net/?tags
 
 # .
 
-<h1 align="center">Hi 👋, I'm <a href= "https://github.com/Stephanie-ga " </h1> Stephanie Anda </a>
+<h1 align="center">Hi 👋, I'm <a href= "https://github.com/Stephanie-ga " </h1> Stephanie Andal </a>
 <h3 align="center">A passionate IT student from BSIT-2101</h3>
 <img align="right" alt="Jenny" width="350" src="imgs/stephanie.jpg">
 
