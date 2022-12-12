@@ -121,7 +121,7 @@ For more clear display, you can view it [here](https://viewer.diagrams.net/?tags
 <h3 align="left">Connect with me:</h3>
 <p align="left">
 <a href="https://www.facebook.com/almeniana.jenny?mibextid=ZbWKwL" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/facebook.svg" alt="profile.php?id=100014323146629&mibextid=zbwkwl" height="30" width="40" /></a>
-<a href="https://instagram.com/jnny_lmnn" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="@jnny_lmnn" height="30" width="40" /></a>
+<a href="https://www.instagram.com/jnny_lm_n__n_/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="@jnny_lmnn" height="30" width="40" /></a>
 </p>
 
 <h3 align="left">Languages and Tools:</h3>
