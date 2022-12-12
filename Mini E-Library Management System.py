@@ -6,7 +6,7 @@ class LoginSystem:
   def doLogin():
     while True:
       print("\n================================================"+
-                             "\n\t\t    LOGIN "+
+                             "\n\t\t    LOGIN"+
              "\n================================================")
       username=input("\tUsername: ")    
       password=input("\tPassword: ")
