@@ -59,10 +59,10 @@ For more clear display, you can view it [here](https://viewer.diagrams.net/?tags
 
 
 .
-# **GROUPMATES PROFILE**
-<h1 align="center">Hi 👋, I'm Nobaisah Kheram</h1>
+# **CREATORS**
+<h1 align="center">Hi 👋, I'm <a href= "https://github.com/nobaisahkheram" </h1> Nobaisah Kheram </a> 
 <h3 align="center">A passionate IT student from BSIT-2101</h3>
-<img align="right" alt="Nobaisah" width="350" src="nobaisah.jpg">
+<img align="right" alt="Nobaisah" width="350" src="imgs/nobaisah.jpg">
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=nobaisahkheram&label=Profile%20views&color=0e75b6&style=flat" alt="nobaisahkheram" /> </p>
 
@@ -84,9 +84,9 @@ For more clear display, you can view it [here](https://viewer.diagrams.net/?tags
 
 # .
 
-<h1 align="center">Hi 👋, I'm Lyzel Leido</h1>
+<h1 align="center">Hi 👋, I'm <a href= "https://github.com/LyZel-prog" </h1> Lyzel Leido </a>
 <h3 align="center">A passionate IT student from BSIT-2101</h3> 
-<img align="right" alt="Lyzel" width="350" src="lyzel.jpg">
+<img align="right" alt="Lyzel" width="350" src="imgs/lyzel.jpg">
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=lyzel-prog&label=Profile%20views&color=0e75b6&style=flat" alt="lyzel-prog" /> </p>
 
@@ -108,9 +108,9 @@ For more clear display, you can view it [here](https://viewer.diagrams.net/?tags
 
 # .
 
-<h1 align="center">Hi 👋, I'm Jenny Almeniana</h1>
+<h1 align="center">Hi 👋, I'm <a href= "https://github.com/JennyAlmeniana" </h1> Jenny Almeniana </a> 
 <h3 align="center">A passionate IT student from BSIT-2101</h3> 
-<img align="right" alt="Jenny" width="350" src="jenny.jpg">
+<img align="right" alt="Jenny" width="350" src="imgs/jenny.jpg">
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=JennyAlmeniana&label=Profile%20views&color=0e75b6&style=flat" alt="jennyalmeniana" /> </p>
 
@@ -131,9 +131,9 @@ For more clear display, you can view it [here](https://viewer.diagrams.net/?tags
 
 # .
 
-<h1 align="center">Hi 👋, I'm Stephanie Andal</h1>
+<h1 align="center">Hi 👋, I'm <a href= "https://github.com/Stephanie-ga " </h1> Stephanie Anda </a>
 <h3 align="center">A passionate IT student from BSIT-2101</h3>
-<img align="right" alt="Jenny" width="350" src="stephanie.jpg">
+<img align="right" alt="Jenny" width="350" src="imgs/stephanie.jpg">
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=Stephanie-ga&label=Profile%20views&color=0e75b6&style=flat" alt="Stephanie-ga" /> </p>
 
