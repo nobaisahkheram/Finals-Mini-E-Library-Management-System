@@ -1,5 +1,0 @@
-1|NoSteLyNny|1234|librarian
-2|Nobaisah|Kheram|student
-3|Lyzel|Leido|student
-4|Stephanie|Andal|student
-5|Jenny|Almeniana|student
